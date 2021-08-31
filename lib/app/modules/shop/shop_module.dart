@@ -5,8 +5,8 @@ import 'package:nubank_marketplace/app/modules/shop/external/drivers/flutter_con
 import 'package:nubank_marketplace/app/modules/shop/infra/repositories/shop_repository_impl.dart';
 import 'package:nubank_marketplace/app/modules/shop/infra/services/connectivity_service_impl.dart';
 
-import 'presenter/shop/shop_controller.dart';
-import 'presenter/shop/shop_page.dart';
+import 'presenter/pages/shop/shop_controller.dart';
+import 'presenter/pages/shop/shop_page.dart';
 
 class ShopModule extends Module {
   static List<Bind> export = [

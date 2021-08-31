@@ -1,10 +1,9 @@
-import 'package:nubank_marketplace/app/modules/shop/presenter/shop/shop_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
-  group('LoginPage', () {
+  group('DefaultBottomNavBarWidget', () {
     testWidgets('has a title and message', (WidgetTester tester) async {
-      await tester.pumpWidget(ShopPage());
+      //await tester.pumpWidget(DefaultBottomNavBarWidget(title: 'T', controller: null,));
       final titleFinder = find.text('T');
       expect(titleFinder, findsOneWidget);
     });

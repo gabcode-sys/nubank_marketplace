@@ -9,13 +9,15 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
-      title: 'Proteinorte',
+      title: 'Nubank Marketplace',
       theme: ThemeData(
         fontFamily: 'Poppins',
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(
-          titleTextStyle: GoogleFonts.poppins(color: Colors.black87),
+          titleTextStyle: GoogleFonts.poppins(
+            color: Colors.black87,
+          ),
         ),
       ),
       localizationsDelegates: [

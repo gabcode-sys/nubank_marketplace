@@ -33,8 +33,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_modular: ^3.4.1+1
+  equatable: ^2.0.3
+  dartz: ^0.10.0
+  connectivity: ^3.0.6
   
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

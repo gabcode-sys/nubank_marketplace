@@ -1,12 +1,16 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:nubank_marketplace/app/modules/login/login_module.dart';
+import 'package:nubank_marketplace/app/core/injection/register_module.dart';
+import 'package:nubank_marketplace/app/modules/shop/shop_module.dart';
 
 class AppModule extends Module {
   @override
   List<Bind> get binds {
     return [
+      ...ShopModule.export,
       //$AuthStore,
-      //Bind((i) => Connectivity()),
+      $RegisterModule,
+      Bind((i) => Connectivity()),
     ];
   }
 
@@ -14,7 +18,7 @@ class AppModule extends Module {
   List<ModularRoute> get routes => [
         ModuleRoute(
           Modular.initialRoute,
-          module: LoginModule(),
+          module: ShopModule(),
         ),
       ];
 }

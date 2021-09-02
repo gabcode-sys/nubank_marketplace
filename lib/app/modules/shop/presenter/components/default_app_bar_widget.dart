@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nubank_marketplace/app/modules/shop/presenter/pages/shop/shop_controller.dart';
 import 'package:nubank_marketplace/app/modules/shop/presenter/widgets/default_filter_button_widget.dart';
 import 'package:nubank_marketplace/app/modules/shop/presenter/widgets/default_title.dart';
+import 'package:nubank_marketplace/app/utils/theme/theme_color.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   DefaultAppBar({
@@ -38,7 +39,15 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: () {
                   controller.setShowBalance(!controller.showBalance);
                 },
-                visible: controller.showBalance,
+                icon: controller.showBalance
+                    ? Icon(
+                        Icons.visibility_outlined,
+                        color: ThemeColor.defaultTheme,
+                      )
+                    : Icon(
+                        Icons.visibility_off_outlined,
+                        color: ThemeColor.widgetForegroundTheme,
+                      ),
               );
             }),
           ],

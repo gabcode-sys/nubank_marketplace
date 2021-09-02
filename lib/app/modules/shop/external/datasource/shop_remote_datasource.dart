@@ -7,6 +7,7 @@ import 'package:nubank_marketplace/app/modules/shop/infra/datasources/shop_datas
 import 'package:nubank_marketplace/app/modules/shop/infra/models/customer_data_model.dart';
 import 'package:nubank_marketplace/app/modules/shop/infra/models/offer_model.dart';
 import 'package:nubank_marketplace/app/modules/shop/infra/models/product_model.dart';
+import 'package:nubank_marketplace/app/modules/shop/infra/models/purchase_model.dart';
 
 part 'shop_remote_datasource.g.dart';
 
@@ -46,6 +47,27 @@ class ShopRemoteDatasourceImpl implements ShopDatasource {
       name: result.data!["viewer"]["name"],
       balance: double.parse(result.data!["viewer"]["balance"].toString()),
       offers: offers,
+    );
+  }
+
+  @override
+  Future<PurchaseModel>? newPurchase({required offerId}) async {
+    late QueryResult result;
+
+    result = await registerModule.gqlClient.mutate(MutationOptions(
+      document: gql(GqlQuery.newPurchaseQuery),
+      variables: {"offerId": offerId},
+    ));
+
+    return PurchaseModel(
+      success: result.data!["purchase"]["success"],
+      errorMessage: result.data!["purchase"]["errorMessage"],
+      customer: CustomerDataModel(
+        id: result.data!["purchase"]["customer"]["id"],
+        name: result.data!["purchase"]["customer"]["name"],
+        balance: double.parse(
+            result.data!["purchase"]["customer"]["balance"].toString()),
+      ),
     );
   }
 }

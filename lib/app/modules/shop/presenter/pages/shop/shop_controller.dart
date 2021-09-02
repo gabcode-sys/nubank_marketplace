@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:intl/intl.dart';
 import 'package:nubank_marketplace/app/modules/shop/domain/entities/customer_data_info.dart';
 import 'package:nubank_marketplace/app/modules/shop/domain/entities/offer_info.dart';
+import 'package:nubank_marketplace/app/modules/shop/domain/entities/offer_param_info.dart';
+import 'package:nubank_marketplace/app/modules/shop/domain/entities/purchase_info.dart';
 import 'package:nubank_marketplace/app/modules/shop/domain/errors/errors.dart';
 import 'package:nubank_marketplace/app/modules/shop/domain/usecases/get_customer_data.dart';
-import 'package:intl/intl.dart';
 
 part 'shop_controller.g.dart';
 
@@ -32,6 +36,16 @@ abstract class ShopControllerBase with Store {
 
   @action
   setShowBalance(bool value) => this.showBalance = value;
+
+  @action
+  toProductDetailsPage(OfferParamInfo offerParam) async =>
+      await Modular.to.pushNamed(
+        '/product_details',
+        arguments: offerParam,
+      );
+
+  @action
+  setCustomerBalance(double value) => this.customerBalance = value;
 
   @action
   Future<bool> getCustomers() async {

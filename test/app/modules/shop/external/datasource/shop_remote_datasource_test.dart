@@ -4,14 +4,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:nubank_marketplace/app/modules/shop/external/datasource/shop_remote_datasource.dart';
 import 'package:nubank_marketplace/app/modules/shop/infra/models/customer_data_model.dart';
+import 'package:nubank_marketplace/app/modules/shop/infra/models/purchase_model.dart';
 
 class ShopRemoteDatasourceMock extends Mock
     implements ShopRemoteDatasourceImpl {}
 
 main() {
   final datasource = ShopRemoteDatasourceMock();
+
   var customers = CustomerDataModel(
       id: '123-321-123', name: 'Gabriel Nunes', balance: 100000);
+  var purchase = PurchaseModel(
+    success: true,
+    customer: CustomerDataModel(
+        id: '123-321', name: 'Gabriel Vieira Nunes', balance: 10000),
+  );
 
   group('getCustomerData |', () {
     test('Should return a CustomerDataModel', () async {
@@ -24,6 +31,15 @@ main() {
       when(datasource.getCustomerData()).thenThrow(Exception());
 
       expect(() => datasource.getCustomerData(), throwsA(isA<Exception>()));
+    });
+  });
+
+  group('newPurchase |', () {
+    test('Should return a PurchaseModel', () async {
+      when(datasource.newPurchase(offerId: '123-321'))
+          .thenAnswer((_) async => purchase);
+      var result = await datasource.newPurchase(offerId: '123-321');
+      expect(result, isA<PurchaseModel>());
     });
   });
 }

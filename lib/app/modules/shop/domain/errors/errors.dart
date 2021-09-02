@@ -17,3 +17,19 @@ class ErrorGetCustomerData extends Failure {
     this.message,
   });
 }
+
+class NotValidEntrie extends Failure {
+  final String? message;
+
+  NotValidEntrie({
+    this.message,
+  });
+}
+
+class NoBalance extends Failure {
+  final String? message;
+
+  NoBalance({
+    this.message,
+  });
+}

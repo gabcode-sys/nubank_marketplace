@@ -19,6 +19,21 @@ final $ShopController = BindInject(
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ShopController on ShopControllerBase, Store {
+  final _$numberFormatAtom = Atom(name: 'ShopControllerBase.numberFormat');
+
+  @override
+  NumberFormat get numberFormat {
+    _$numberFormatAtom.reportRead();
+    return super.numberFormat;
+  }
+
+  @override
+  set numberFormat(NumberFormat value) {
+    _$numberFormatAtom.reportWrite(value, super.numberFormat, () {
+      super.numberFormat = value;
+    });
+  }
+
   final _$showBalanceAtom = Atom(name: 'ShopControllerBase.showBalance');
 
   @override
@@ -80,6 +95,15 @@ mixin _$ShopController on ShopControllerBase, Store {
     });
   }
 
+  final _$toProductDetailsPageAsyncAction =
+      AsyncAction('ShopControllerBase.toProductDetailsPage');
+
+  @override
+  Future toProductDetailsPage(OfferParamInfo offerParam) {
+    return _$toProductDetailsPageAsyncAction
+        .run(() => super.toProductDetailsPage(offerParam));
+  }
+
   final _$getCustomersAsyncAction =
       AsyncAction('ShopControllerBase.getCustomers');
 
@@ -103,8 +127,20 @@ mixin _$ShopController on ShopControllerBase, Store {
   }
 
   @override
+  dynamic setCustomerBalance(double value) {
+    final _$actionInfo = _$ShopControllerBaseActionController.startAction(
+        name: 'ShopControllerBase.setCustomerBalance');
+    try {
+      return super.setCustomerBalance(value);
+    } finally {
+      _$ShopControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+numberFormat: ${numberFormat},
 showBalance: ${showBalance},
 customerName: ${customerName},
 customerBalance: ${customerBalance},

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nubank_marketplace/app/modules/shop/domain/entities/customer_data_info.dart';
+import 'package:nubank_marketplace/app/modules/shop/domain/entities/purchase_info.dart';
 import 'package:nubank_marketplace/app/modules/shop/domain/errors/errors.dart';
 import 'package:nubank_marketplace/app/modules/shop/domain/repositories/shop_repository.dart';
 import 'package:nubank_marketplace/app/modules/shop/infra/datasources/shop_datasource.dart';
@@ -23,6 +24,21 @@ class ShopRepositoryImpl implements ShopRepository {
       return Left(
         ErrorGetCustomerData(
           message: "An error has ocurred when trying get customer data",
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, PurchaseInfo?>?>? newPurchase(
+      {required offerId}) async {
+    try {
+      var purchase = await dataSource.newPurchase(offerId: offerId);
+      return Right(purchase);
+    } on Exception catch (e) {
+      return Left(
+        ErrorGetCustomerData(
+          message: "An error has ocurred when trying insert a new purchase",
         ),
       );
     }

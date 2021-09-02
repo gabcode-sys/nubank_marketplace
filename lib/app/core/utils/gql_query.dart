@@ -18,4 +18,17 @@ mixin GqlQuery {
     }
   }
   ''';
+
+  static String newPurchaseQuery = '''
+  mutation newPurchase(\$offerId: ID!) {
+    purchase(offerId: \$offerId) {
+      success
+      errorMessage
+      customer{
+        id
+        name
+        balance
+      }
+    }
+  }''';
 }

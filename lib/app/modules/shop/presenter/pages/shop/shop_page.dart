@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nubank_marketplace/app/modules/shop/presenter/components/default_app_bar_widget.dart';
 import 'package:nubank_marketplace/app/modules/shop/presenter/components/default_body_widget.dart';

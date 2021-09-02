@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nubank_marketplace/app/modules/shop/domain/entities/purchase_info.dart';
+import 'package:nubank_marketplace/app/modules/shop/infra/models/offer_param_model.dart';
 import 'package:nubank_marketplace/app/modules/shop/presenter/pages/shop/shop_controller.dart';
 import 'package:nubank_marketplace/app/utils/theme/theme_color.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -42,70 +45,102 @@ class DefaultBodyWidget extends StatelessWidget {
                 mainAxisSpacing: 30,
                 itemCount: controller.offers.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            decoration: BoxDecoration(
-                              color: ThemeColor.widgetBackgroundTheme,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
+                  return InkWell(
+                    onTap: () async {
+                      var purchase = await controller.toProductDetailsPage(
+                        OfferParamModel(
+                          balance: controller.customerBalance,
+                          offer: controller.offers[index],
+                        ),
+                      );
+
+                      if (purchase != null) if (purchase.success) {
+                        if (purchase is PurchaseInfo) {
+                          controller
+                              .setCustomerBalance(purchase.customer.balance);
+                          BeautifulPopup(
+                            context: context,
+                            template: TemplateCoin,
+                          ).show(
+                            title: 'Pedido enviado!',
+                            content: 'Sua compra foi realizada com sucesso!',
+                          );
+                        }
+                      } else {
+                        BeautifulPopup(
+                          context: context,
+                          template: TemplateFail,
+                        ).show(
+                          title: 'Ops!',
+                          content: purchase.errorMessage,
+                        );
+                      }
+                    },
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              decoration: BoxDecoration(
+                                color: ThemeColor.widgetBackgroundTheme,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
                               ),
-                            ),
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(18)),
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: controller.offers[index].product.image,
-                                fit: BoxFit.cover,
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(18)),
+                                child: FadeInImage.memoryNetwork(
+                                  placeholder: kTransparentImage,
+                                  image: controller.offers[index].product.image,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(top: 5),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: 'R\$ ',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 9,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
+                          Container(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'R\$ ',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black87,
+                                        ),
                                       ),
-                                    ),
-                                    TextSpan(
-                                      text:
-                                          '${controller.numberFormat.format(controller.offers[index].price)}',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
+                                      TextSpan(
+                                        text:
+                                            '${controller.numberFormat.format(controller.offers[index].price)}',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black87,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '${controller.offers[index].product.name}',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400,
-                                  color: ThemeColor.widgetForegroundTheme,
+                                Text(
+                                  '${controller.offers[index].product.name}',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: ThemeColor.widgetForegroundTheme,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },

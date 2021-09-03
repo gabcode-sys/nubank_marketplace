@@ -8,12 +8,12 @@ import 'package:nubank_marketplace/app/modules/home/presenter/pages/product_deta
 import 'package:nubank_marketplace/app/modules/home/presenter/widgets/default_button_widget.dart';
 import 'package:nubank_marketplace/app/utils/theme/theme_color.dart';
 
-class ProductDetailsBottomNavbarWidget extends StatelessWidget {
+class ProductDetailsBottomNavbarComponent extends StatelessWidget {
   final String title;
   final ProductDetailsController controller;
-  const ProductDetailsBottomNavbarWidget(
+  const ProductDetailsBottomNavbarComponent(
       {Key? key,
-      this.title = "ProductDetailsBottomNavbarWidget",
+      this.title = "ProductDetailsBottomNavbarComponent",
       required this.controller})
       : super(key: key);
 

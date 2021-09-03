@@ -8,10 +8,10 @@ import 'package:nubank_marketplace/app/modules/home/presenter/pages/shop/shop_co
 import 'package:nubank_marketplace/app/utils/theme/theme_color.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class ShopBodyWidget extends StatelessWidget {
+class ShopBodyComponent extends StatelessWidget {
   final String title;
   final ShopController controller;
-  const ShopBodyWidget({
+  const ShopBodyComponent({
     Key? key,
     this.title = "DefaultBodyWidget",
     required this.controller,

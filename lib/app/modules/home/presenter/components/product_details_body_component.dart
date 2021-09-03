@@ -7,10 +7,10 @@ import 'package:nubank_marketplace/app/utils/theme/theme_color.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class ProductDetailsBodyWidget extends StatelessWidget {
+class ProductDetailsBodyComponent extends StatelessWidget {
   final String title;
   final ProductDetailsController controller;
-  const ProductDetailsBodyWidget(
+  const ProductDetailsBodyComponent(
       {Key? key,
       this.title = "ProductDetailsBodyWidget",
       required this.controller})

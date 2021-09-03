@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:nubank_marketplace/app/modules/home/presenter/components/product_details_body_widget.dart';
-import 'package:nubank_marketplace/app/modules/home/presenter/components/product_details_bottom_navbar_widget.dart';
+import 'package:nubank_marketplace/app/modules/home/presenter/components/product_details_body_component.dart';
+import 'package:nubank_marketplace/app/modules/home/presenter/components/product_details_bottom_navbar_component.dart';
 
 import 'product_details_controller.dart';
 
@@ -23,9 +23,9 @@ class ProductDetailsPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ProductDetailsBodyWidget(controller: controller),
+      body: ProductDetailsBodyComponent(controller: controller),
       bottomNavigationBar:
-          ProductDetailsBottomNavbarWidget(controller: controller),
+          ProductDetailsBottomNavbarComponent(controller: controller),
     );
   }
 }

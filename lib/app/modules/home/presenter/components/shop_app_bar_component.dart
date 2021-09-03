@@ -5,8 +5,9 @@ import 'package:nubank_marketplace/app/modules/home/presenter/widgets/default_bu
 import 'package:nubank_marketplace/app/modules/home/presenter/widgets/default_title_widget.dart';
 import 'package:nubank_marketplace/app/utils/theme/theme_color.dart';
 
-class ShopAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  ShopAppBarWidget({
+class ShopAppBarComponent extends StatelessWidget
+    implements PreferredSizeWidget {
+  ShopAppBarComponent({
     required ShopController controller,
   }) : controller = controller;
 

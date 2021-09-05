@@ -58,6 +58,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 
 ## Available Features
 * Home
+* Product Details
 * Routing
 * Database
 * MobX

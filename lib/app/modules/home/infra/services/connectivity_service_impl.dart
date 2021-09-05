@@ -18,12 +18,12 @@ class ConnectivityServiceImpl implements ConnectivityService {
       if (check) {
         return Right(unit);
       }
-      throw ConnectionError(message: 'Você está offline');
+      throw ConnectionError(message: 'You are not connected');
     } on Failure catch (e) {
       return Left(e);
     } catch (e) {
       return Left(
-        ConnectionError(message: 'Erro ao Recuperar Informação de Conexão'),
+        ConnectionError(message: 'Error Retrieving Connection Information'),
       );
     }
   }

@@ -45,16 +45,11 @@ abstract class ShopControllerBase with Store {
   setCustomerBalance(double value) => this.customerBalance = value;
 
   @action
-  Future<bool> getCustomers() async {
+  Future<dynamic> getCustomers() async {
     var result = await getCustomerDataUseCase();
+
     return result!.fold((l) {
-      if (l is ConnectionError) {
-        return false;
-      } else if (l is ErrorGetCustomerData) {
-        return false;
-      } else {
-        return false;
-      }
+      return l;
     }, (CustomerDataInfo? r) {
       List<OfferInfo> offersReturn = r?.offers;
       customerName = r?.name;

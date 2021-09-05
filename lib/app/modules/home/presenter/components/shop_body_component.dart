@@ -3,6 +3,7 @@ import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nubank_marketplace/app/modules/home/domain/entities/purchase_info.dart';
+import 'package:nubank_marketplace/app/modules/home/domain/errors/errors.dart';
 import 'package:nubank_marketplace/app/modules/home/infra/models/offer_param_model.dart';
 import 'package:nubank_marketplace/app/modules/home/presenter/pages/shop/shop_controller.dart';
 import 'package:nubank_marketplace/app/utils/theme/theme_color.dart';
@@ -25,13 +26,34 @@ class ShopBodyComponent extends StatelessWidget {
       onRefresh: () async {
         await controller.getCustomers();
       },
-      child: FutureBuilder<bool>(
+      child: FutureBuilder<dynamic>(
           future: controller.getCustomers(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return Center(
                 child: CircularProgressIndicator(
                   color: ThemeColor.defaultTheme,
+                ),
+              );
+            if (snapshot.data is Failure)
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.wifi_off_rounded,
+                      color: Colors.black87,
+                      size: 44,
+                    ),
+                    Text(
+                      "${snapshot.data.message}, restart the application",
+                      style: GoogleFonts.poppins(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
                 ),
               );
             return StaggeredGridView.countBuilder(

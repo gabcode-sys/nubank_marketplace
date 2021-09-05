@@ -108,7 +108,7 @@ mixin _$ShopController on ShopControllerBase, Store {
       AsyncAction('ShopControllerBase.getCustomers');
 
   @override
-  Future<bool> getCustomers() {
+  Future<dynamic> getCustomers() {
     return _$getCustomersAsyncAction.run(() => super.getCustomers());
   }
 
